@@ -1,7 +1,11 @@
 body {
     font-family: sans-serif;
-    background-color: lightgrey;
+    /background-color: lightgrey;
     margin-top: 75px;
+    text-align:center;
+    background-color: antiquewhite;
+
+        
 }
 
 .center {
@@ -20,3 +24,13 @@ body {
     height: 200px;
 }
 
+  .content{
+              font-family: cursive;
+    padding-top: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: larger;
+        }
+        h3.heading {
+    text-decoration: underline;
+}
