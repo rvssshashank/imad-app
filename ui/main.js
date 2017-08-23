@@ -17,7 +17,7 @@ var img= document.getElementById('madi');
 var marginLeft= 0;
 // make img move like animation
 function moveRight(){
-    marginLeft= marginLeft+ 5;
+    marginLeft= marginLeft+ 3;
     img.style.marginLeft= marginLeft+ 'px';
     
 }
