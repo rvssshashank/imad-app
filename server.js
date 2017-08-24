@@ -13,7 +13,7 @@ var pool = new Pool({
 
 var app = express();
 app.use(morgan('combined'));
-
+/*
 var articles ={
 'article-one': {
     title: 'articleone',
@@ -38,7 +38,7 @@ var articles ={
                 </p>`
 }
 };
-
+*/
 function createTemplate(data){
 var title= data.title;
 var date= data.date;
@@ -98,13 +98,13 @@ app.get('articles/:articleName', function (req, res)
 {
     var articleName= req.params.articleName;
     
-    pool.query("SELECT * FROM articles WHERE title= '"+req.params.articleName+"'", function(err,result){
+    pool.query("SELECT * FROM articles WHERE title = '"+req.params.articleName+"'", function(err, result){
         
         if(err){
             res.status(500).send(err.toString());
         }
         else{
-            if(result.row.length === [0]){
+            if(result.rows.length === [0]){
                 res.send(404).send('No article found');
             }else
             {
