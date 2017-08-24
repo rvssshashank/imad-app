@@ -8,7 +8,7 @@ var pool = new Pool({
   host: 'db.imad.hasura-app.io',
   database: 'rshashi57',
   password: process.env.DB_PASSWORD,
-  port: 54321,
+  port: 5432
 });
 
 var app = express();
