@@ -93,7 +93,7 @@ app.get('/test-db',function(req,res)
   res.send(createTemplate(article-one));
 });*/
 
-app.get('articles/:articleName', function (req, res)
+app.get('/articles/:articleName', function (req, res)
 //articleNmae== article-one
 {
     var articleName= req.params.articleName;
