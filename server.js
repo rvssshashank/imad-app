@@ -98,7 +98,7 @@ app.get('articles/:articleName', function (req, res)
 {
     var articleName= req.params.articleName;
     
-    pool.query("SELECT * FROM articles WHERE title= '"+req.params.articlename+"'", function(err,result){
+    pool.query("SELECT * FROM articles WHERE title= '"+req.params.articleName+"'", function(err,result){
         
         if(err){
             res.status(500).send(err.tostring());
@@ -109,7 +109,7 @@ app.get('articles/:articleName', function (req, res)
             }else
             {
                 var articleData= result.reows[0];
-                res.send(createTemplate(articledata));
+                res.send(createTemplate(articleData));
             }
         }
     })
