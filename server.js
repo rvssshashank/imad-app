@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 const crypto = require('crypto');
-var bodyparser= require('body-parser');
+var bodyParser= require('body-parser');
 var Pool= require('pg').Pool;
 var pool = new Pool({
   user: 'rshashi57',
@@ -152,7 +152,7 @@ app.get('/hash/:input', function (req, res)
             }else
             {
                 var articleData= result.rows[0];
-                res.send('successfully created', +username);
+                res.send('successfully created' +username);
             }
         }
     });
