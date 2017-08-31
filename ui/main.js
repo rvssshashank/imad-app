@@ -30,7 +30,7 @@ img.onclick=function(){
 
 // submit username and password
    var submit= document.getElementById('submt_butn');
-   submit.onclick =function(){
+   submit.onclick = function(){
        
        //create a request object
        var request = new XMLHttpRequest();
