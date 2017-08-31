@@ -122,7 +122,7 @@ app.get('/articles/:articleName', function (req, res)
 
 function hash(input,salt){
     var hashed= crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
-  return(hashed.toString('hex'));
+  return["pbkdf2","10000", salt, hashed.toString('hex')].join('$');
 }
 
 app.get('/hash/:input', function (req, res)
@@ -151,8 +151,40 @@ app.get('/hash/:input', function (req, res)
                 res.send(404).send('No article found');
             }else
             {
-                var articleData= result.rows[0];
+                
                 res.send('successfully created' +username);
+            }
+        }
+    });
+});
+
+app.post('/create-user', function (req, res)
+{   //username, password
+    // ["username"= "user" "passwrod"="password"]
+    //JSON request
+    var username= req.body.username;
+    var password = req.body.password;
+   
+    pool.query("SELECT * FROM users WHERE username = $1 ", [username], function(err, result){
+        
+        if(err){
+            res.status(500).send(err.toString());
+        }
+        else{
+            if(result.rows.length === [0]){
+                res.send(404).send('USERNAME/PASS IS INCORECT');
+            }else
+            {
+                //match password
+                var dbString= result.rows[0].password;
+                var salt= dbString.split('$')[2];
+                var hashedpassword= hash(password,salt);
+                if(hashedpassword=== dbstring){
+                    res.send("user succesfully loged in");
+                }
+                else{
+                      res.send(404).send('USERNAME/PASS IS INCORECT');
+                }
             }
         }
     });
