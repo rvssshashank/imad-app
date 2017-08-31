@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 const crypto = require('crypto');
-
+var bodyparser= require('body-parser');
 var Pool= require('pg').Pool;
 var pool = new Pool({
   user: 'rshashi57',
@@ -14,6 +14,8 @@ var pool = new Pool({
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json());
+
 /*
 var articles ={
 'article-one': {
@@ -122,7 +124,7 @@ function hash(input,salt){
     var hashed= crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
   return(hashed.toString('hex'));
 }
-  
+
 app.get('/hash/:input', function (req, res)
 //articleNmae== article-one
 {
@@ -130,6 +132,31 @@ app.get('/hash/:input', function (req, res)
     res.send(hashedString);
 });
   
+ app.post('/create-user', function (req, res)
+{   //username, password
+    // ["username"= "user" "passwrod"="password"]
+    //JSON request
+    var username= req.body.username;
+    var password = req.body.password;
+    var salt= crypto.randomBytes(128).totring('hex');
+    var dbString= hash(password, salt);
+    
+    pool.query("INSERT INTO users [username, password] VALUES($1, $1) ", [username, password], function(err, result){
+        
+        if(err){
+            res.status(500).send(err.toString());
+        }
+        else{
+            if(result.rows.length === [0]){
+                res.send(404).send('No article found');
+            }else
+            {
+                var articleData= result.rows[0];
+                res.send('successfully created', +username);
+            }
+        }
+    });
+});
 /*
 app.get('/:articleName', function (req, res)
 //articleNmae== article-one
