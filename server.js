@@ -1,6 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+const crypto = require('crypto');
 
 var Pool= require('pg').Pool;
 var pool = new Pool({
@@ -116,11 +117,16 @@ app.get('/articles/:articleName', function (req, res)
         }
     });
 });
+
+function hash(input,salt){
+    var hashed= crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
+  return(hashed.toString('hex'));
+}
   
 app.get('/hash-:input', function (req, res)
 //articleNmae== article-one
 {
-    var hashedString= hash(req.params.input);
+    var hashedString= hash(req.params.input,'this-is-some-random-string');
     res.send(hashedString);
 });
   
