@@ -94,8 +94,10 @@ app.get('/test-db',function(req,res)
 });*/
 
 app.get('/articles/:articleName', function (req, res)
-//articleNmae== article-one
 {
+    
+//articleNmae== article-one
+
     var articleName= req.params.articleName;
     
     pool.query("SELECT * FROM articles WHERE title = $1 ", [req.params.articleName], function(err, result){
@@ -112,10 +114,15 @@ app.get('/articles/:articleName', function (req, res)
                 res.send(createTemplate(articleData));
             }
         }
-    });
-  
-  // articles[articlaName]= {}content objects for article-one
 });
+  
+app.get('/hash-:input', function (req, res)
+//articleNmae== article-one
+{
+    var hashedString= hash(req.params.input);
+    res.send(hashedString);
+});
+  
 /*
 app.get('/:articleName', function (req, res)
 //articleNmae== article-one
