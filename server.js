@@ -121,7 +121,7 @@ app.get('/articles/:articleName', function (req, res)
 });
 
 function hash(input,salt){
-    var hashed= crypto.pbkdf2Sync(input, 'salt', 100000, 512, 'sha512');
+    var hashed= crypto.pbkdf2Sync(input, 'salt', 10000, 512, 'sha512');
   return["pbkdf2","10000", salt, hashed.toString('hex')].join('$');
 }
 
@@ -165,7 +165,7 @@ app.post('/login', function (req, res)
     var username= req.body.username;
     var password = req.body.password;
    
-    pool.query("SELECT * FROM users WHERE username=$1 ", [username], function(err, result){
+    pool.query("SELECT * FROM users WHERE username=$1 " [username], function(err, result){
         
         if(err){
             res.status(500).send(err.toString());
