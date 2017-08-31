@@ -1,3 +1,4 @@
+
 console.log('Loaded!');
 // change the text from main-text id in index.html
 
@@ -24,6 +25,7 @@ function moveRight(){
 img.onclick=function(){
     var interval= setInterval(moveRight,50);
 };
+
 
 
 // submit username and password
