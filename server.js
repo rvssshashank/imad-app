@@ -158,7 +158,7 @@ app.get('/hash/:input', function (req, res)
     });
 });
 
-app.post('/create-user', function (req, res)
+app.post('/login', function (req, res)
 {   //username, password
     // ["username"= "user" "passwrod"="password"]
     //JSON request
