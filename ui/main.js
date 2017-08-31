@@ -58,5 +58,5 @@ img.onclick=function(){
      console.log(password);
      request.open('POST','http://rshashi57.imad.hasura-app.io/login',true);
      request.setRequestHeader('Content-Type','application/json');
-     request.send(JSON.stringify({username:username, password:password}));
+     request.send(JSON.stringify({username: username, password: password}));
    };
