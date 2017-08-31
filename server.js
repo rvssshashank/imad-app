@@ -138,7 +138,7 @@ app.get('/hash/:input', function (req, res)
     //JSON request
     var username= req.body.username;
     var password = req.body.password;
-    var salt= crypto.randomBytes(128).totring('hex');
+    var salt= crypto.randomBytes(128).toString('hex');
     var dbString= hash(password, salt);
     
     pool.query("INSERT INTO 'users' [username, password] VALUES($1, $1) ", [username, password], function(err, result){
