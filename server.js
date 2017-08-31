@@ -172,7 +172,7 @@ app.post('/login', function (req, res)
         }
         else{
             if(result.rows.length === [0]){
-                res.send(404).send('USERNAME/PASS IS INCORECT');
+                res.send(403).send('USERNAME/PASS IS INCORECT');
             }else
             {
                 //match password
@@ -183,7 +183,7 @@ app.post('/login', function (req, res)
                     res.send("user succesfully loged in");
                 }
                 else{
-                      res.send(404).send('USERNAME/PASS IS INCORECT');
+                      res.send(403).send('USERNAME/PASS IS INCORECT');
                 }
             }
         }
